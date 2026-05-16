@@ -5,6 +5,7 @@ const port = process.env.PORT || 8000;
 
 //middlewar
 app.use(cors());
+app.use(express.json());
 
 app.get('/', (req, res) => {
     res.send('Hello from express world')
@@ -57,8 +58,13 @@ app.get('/users', (req, res) => {
 })
 
 app.post('/users', (req, res)=>{
-    console.log('Post request is working')
-    res.send('Post request is working')
+    console.log('Data in the request', req.body);
+
+    const newUser = req.body;
+    newUser.id = users.length + 1;
+    users.push(newUser);
+
+    res.send({ success: true, data: newUser, message:'Post request is working'})
 })
 
 app.get('/products', (req, res) => {
