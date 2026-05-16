@@ -1,6 +1,10 @@
 const express = require('express');
 const app = express();
+const cors = require('cors')
 const port = process.env.PORT || 8000;
+
+//middlewar
+app.use(cors());
 
 app.get('/', (req, res) => {
     res.send('Hello from express world')
@@ -52,7 +56,12 @@ app.get('/users', (req, res) => {
     res.send(users);
 })
 
-app.get('products', (req, res) => {
+app.post('/users', (req, res)=>{
+    console.log('Post request is working')
+    res.send('Post request is working')
+})
+
+app.get('/products', (req, res) => {
     res.send('Products are jumping up')
 })
 
